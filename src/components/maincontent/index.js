@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import styles from './index.less';
 import modalConfig from '../../modal.config';
+import Modal from '@components/modal';
 
 class MainContent extends Component {
 	static defaultProps = {
@@ -50,6 +51,10 @@ class MainContent extends Component {
 		});
 	};
 
+	onDetailClick = (feature) => {
+		this.props.onDetailClick(feature);
+	}
+
 	render() {
 		const { modalTitle, menuTitle, modalId, menuId } = this.state;
 		return (
@@ -58,7 +63,7 @@ class MainContent extends Component {
 					<h2>{modalTitle}--{menuTitle}</h2>
 				</div>
 				<div className={styles.content}>
-					{menuTitle}--{modalId}--{menuId}
+					<Modal onDetailClick={this.onDetailClick}/>
 				</div>
 			</div>
 		);

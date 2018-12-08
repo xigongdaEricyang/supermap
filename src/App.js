@@ -7,6 +7,7 @@ import { Layout, Menu } from 'antd';
 const { Content, Sider, Footer } = Layout;
 
 import styles from './App.less';
+import InfoBox from '@components/infoBox';
 
 class App extends React.Component {
 
@@ -16,7 +17,8 @@ class App extends React.Component {
 			currentMenu: {
 				key: 'fq-overview',
 				keyPath: ['fq-overview', 'fq']
-			}
+			},
+			feature: {}
 		}
 	} 
 
@@ -27,8 +29,15 @@ class App extends React.Component {
 		});
 	}
 
+	onDetailClick = (feature) =>{
+		console.log(feature);
+		this.setState({
+			feature
+		})
+	};
+
 	render() {
-		const { currentMenu } = this.state;
+		const { currentMenu, feature } = this.state;
 		return (
 			<Layout
 				style={{
@@ -61,10 +70,15 @@ class App extends React.Component {
 								minHeight: 280
 							}}
 						>
-							<MainContent currentMenu={currentMenu} />
+							<MainContent 
+								currentMenu={currentMenu}
+							 	onDetailClick={this.onDetailClick}
+							 />
 						</Content>
 					</Layout>
-					<Sider width={250} />
+					<Sider width={400} className={styles.rightSider}>
+						<InfoBox features={feature}/>
+					</Sider>
 				</Layout>
 			</Layout>
 		);
